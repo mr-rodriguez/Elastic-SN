@@ -12,17 +12,25 @@ This repository is maintained as a controlled reference guide.
 
 This build walks through deploying a single-node Elastic Stack environment using a structured, phased approach:
 
+The build is organized into the following chapters under `/docs`:
+
 1. **Vagrant Environment Setup**  
-   Provision the virtualized lab environment and supporting infrastructure.
+   `/docs/01-vagrant-environment`  
+   Provision and configure the virtualized lab infrastructure.
 
-2. **Elasticsearch Setup**  
-   Deploy and configure Elasticsearch nodes for data ingestion and storage.
+2. **Elasticsearch Deployment**  
+   `/docs/02-elasticsearch`  
+   Install, configure, and validate Elasticsearch nodes.
 
-3. **Kibana & Security Policy Configuration**  
+3. **Kibana & Security Policies**  
+   `/docs/03-kibana-and-policies`  
    Configure Kibana, enable security features, and apply baseline policies.
 
-4. **Fleet Server Deployment**  
+4. **Fleet Server Setup**  
+   `/docs/04-fleet-server`  
    Deploy and configure Fleet Server for centralized agent management.
 
-5. **Elastic Agents, Policies, & Integrations**  
-   Enroll agents, define agent policies, and enable required integrations.
+5. **Elastic Agents & Integrations**  
+   `/docs/05-agents-and-integrations`  
+   Enroll agents, define agent policies, and enable integrations.
+
