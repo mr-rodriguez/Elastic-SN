@@ -161,26 +161,6 @@ If you entered a password when creating the node certificate, run these commands
 ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
 ```
 
-
-Edit `elasticsearch.yml` to how you see below
-- leave `xpack.security.http.ssl.keystore.path:` as is it for now
-```bash
-vim config/elasticsearch.yml
-```
-```YAML
-xpack.security.enabled: true
-xpack.security.http.ssl:
-	enabled: true
-	keystore.path: <wait until http cert is created>
-	
-xpack.security.transport.ssl:
-	enabled: true
-	verification_mode: certificate
-	client_authentication: required
-	keystore.path: elastic-certificates.p12
-	truststore.path: elastic-certificates.p12
-```
-
 ## Setup HTTPS
 
 Generate TLS certs with Elasticsearch HTTP cert tool
@@ -222,7 +202,7 @@ Generate TLS certs with Elasticsearch HTTP cert tool
 |_ sample-elasticsearch.yml
 ```
 
-*IGNORE THIS DIRECTORY AND PEM FILE. WE WILL CREATE ONE USING THE `http.p12` above*
+*IGNORE THE `/kibana` DIRECTORY AND PEM FILE. WE WILL CREATE ONE USING THE `http.p12` above*
 ```txt
 /kibana
 |_ README.txt
@@ -230,17 +210,32 @@ Generate TLS certs with Elasticsearch HTTP cert tool
 |_ sample-kibana.yml
 ```
 
-- Move the cert to the right location
+Move the cert to the right location
 ```bash
 mv elasticsearch/http.p12 config/
 ```
 
-- Now edit the `elasticsearch.yml` file to enable HTTPS security and specify the location of the `http.p12` security certificate
-```yaml
-xpack.security.http.ssl.keystore.path: http.p12
+Edit `elasticsearch.yml` security settings
+- here we are setting the new certificates you generated a moment ago
+- we are also adding `xpack.security.transport.ssl.client_authentication: required`
+```bash
+vim config/elasticsearch.yml
+```
+```YAML
+xpack.security.enabled: true
+xpack.security.http.ssl:
+	enabled: true
+	keystore.path: http.p12
+	
+xpack.security.transport.ssl:
+	enabled: true
+	verification_mode: certificate
+	client_authentication: required
+	keystore.path: elastic-certificates.p12
+	truststore.path: elastic-certificates.p12
 ```
 
-- Add the password for your private key to the secure settings in Elasticsearch
+Add the password for your private key to the secure settings in Elasticsearch
 ```shell
 ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
 ```
