@@ -28,8 +28,8 @@ sudo ufw enable ; sudo ufw allow ssh ; sudo ufw allow 5601/tcp ; sudo ufw allow 
 ```
 - port info
 	- 5601/tcp: browser > kibana ui
-	- 8220/tcp: fleet > elasticsearch
-	- ssh: same as with elasticsearch node
+	- 8220/tcp: communication between elastic agents and the fleet server
+	- ssh: needed to scp files over to kibana and/or other nodes from elasticsearch node (e.g. certificates)
 
 Generate and copy SSH keys
 - cannot use `ssh-copy-id`. must copy/paste `id_rsa.pub` manually to `authorized_keys` file
@@ -276,10 +276,4 @@ scp kibana-server/kibana-server.* vagrant@ip-of-kibana:/home/vagrant
 
 Done for now
 
-*At this point, I created a snapshot of the vagrant box*
-- must be done on local machine, not in the vagrant box
-```bash
-vagrant snapshot save --timestamp elasticsearch01 elasticsearch01-post-step1-config
-```
-
-- Go to `docs/03-kibana-and-policies.md` 
+- Go to `docs/03-setup-kibana.md` 
