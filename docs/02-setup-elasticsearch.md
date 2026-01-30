@@ -107,17 +107,36 @@ pkill -F pid
 ```
 
 ## Minimal security setup
-Edit `elasticsearch.yml`
-```bash
-vim config/elasticsearch.yml
+- this is necessary per the elastic documentation, but the `elasticsearch.yml` file should be good to go
+- verify that these settings were added:
+```yaml
+#----------------------- BEGIN SECURITY AUTO CONFIGURATION -----------------------
+#
+# The following settings, TLS certificates, and keys have been automatically      
+# generated to configure Elasticsearch security features on 30-01-2026 13:23:48
+#
+# --------------------------------------------------------------------------------
+
+# Enable security features
+xpack.security.enabled: true
+
+xpack.security.enrollment.enabled: true
+
+# Enable encryption for HTTP API client connections, such as Kibana, Logstash, and Agents
+xpack.security.http.ssl:
+  enabled: true
+  keystore.path: certs/http.p12
+
+# Enable encryption and mutual authentication between cluster nodes
+xpack.security.transport.ssl:
+  enabled: true
+  verification_mode: certificate
+  keystore.path: certs/transport.p12
+  truststore.path: certs/transport.p12
+#----------------------- END SECURITY AUTO CONFIGURATION -------------------------
+
 ```
 
-Comment out `cluster.initial_master_nodes: ["<node_name>]` 
-- if both are uncommented, you will get an error when starting elasticsearch
-```YAML
-discovery.type: single-node
-#cluster.initial_master_nodes: ["<node_name>"]
-```
 ## Setup transport TLS: Generate certs (do this on elasticsearch node)
 ```bash
 ./bin/elasticsearch-certutil ca
