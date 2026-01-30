@@ -20,8 +20,15 @@ sudo systemctl enable --now auditd && sudo systemctl status auditd
 ```
 
 **Step 2.**
-- create a directory that matches the path you configured in the Fleet Outputs under `Advanced YAML`
-	- then, copy the `elasticsearch-ca.pem` from your elasticsearch node over to that path
+- copy the `elasticsearch-ca.pem` from your elasticsearch node to `/etc/ssl/certs`, which matches the ssl path you set in Fleet > Settings > Outputs > `Advanced YAML`
+- you will need to create an ssh key and copy it to the elasticsearch node's `authorized_keys`
+```bash
+scp vagrant@10.10.1.2:/home/vagrant/elasticsearch-9.2.4/elasticsearch-ca.pem .
+```
+
+```bash
+sudo cp elasticsearch-ca.pem /etc/ssl/certs
+```
 
 # Create and configure policy and add elastic agent
 
