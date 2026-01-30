@@ -24,13 +24,17 @@ The build is organized into the following chapters under `/docs`:
 
 3. **Kibana & Security Policies**  
    `/docs/03-kibana-and-policies`  
-   Configure Kibana, enable security features, and apply baseline policies.
+   Install and configure Kibana.
 
 4. **Fleet Server Setup**  
-   `/docs/04-fleet-server`  
+   `/docs/04-setup-fleet-server`  
    Deploy and configure Fleet Server for centralized agent management.
 
 5. **Elastic Agents & Integrations**  
-   `/docs/05-agents-and-integrations`  
+   `/docs/05-agents-agentpolicies-and-integrations`  
    Enroll agents, define agent policies, and enable integrations.
+
+6. **Index Template and Index Lifecycle Policy**
+   `/docs/06-index-policies`
+   Add an ILM policy to an index template - fix yellow status indicies
 
