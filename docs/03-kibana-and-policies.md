@@ -128,7 +128,7 @@ Let's fix this:
 		9. Click Next until the end and click `Create template`
 ```json
 {
-  "index.lifecycle.policy": "my-first-ilm-policy",
+  "index.lifecycle.name": "my-first-ilm-policy",
   "number_of_replicas": 0
 }
 ``` 
