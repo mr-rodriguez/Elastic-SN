@@ -20,15 +20,15 @@ sudo systemctl enable --now auditd && sudo systemctl status auditd
 ```
 
 **Step 2.**
-- copy the `elasticsearch-ca.pem` from your elasticsearch node to `/etc/ssl/certs`, which matches the ssl path you set in Fleet > Settings > Outputs > `Advanced YAML`
+- create a directory path that matches what you entered in Fleet > Settings > Outputs > `Advanced YAML`
+  - in our case it was `/home/vagrant/kibana-9.2.4/config/`
+  - this feels weird, but i ran into many issues here, so this is to keep it simple
+- copy the `elasticsearch-ca.pem` to that directory
 - you will need to create an ssh key and copy it to the elasticsearch node's `authorized_keys`
 ```bash
-scp vagrant@10.10.1.2:/home/vagrant/elasticsearch-9.2.4/elasticsearch-ca.pem .
+scp vagrant@10.10.1.2:/home/vagrant/elasticsearch-9.2.4/elasticsearch-ca.pem /home/vagrant/kibana-9.2.4/config/
 ```
 
-```bash
-sudo cp elasticsearch-ca.pem /etc/ssl/certs
-```
 
 # Create and configure policy and add elastic agent
 
@@ -74,5 +74,4 @@ sudo /opt/Elastic/Agent/elastic-agent status
 		- Analytics > Dashboards > `[Logs Auditd] Audit Events`
     - may need to run some privileged commands on the box to generate logs
 
-**Done! Congratulations =)**
-- now try adding the Elastic Defend integration to your ubuntu policy!
+Next, go to `docs/06-index-policies`
