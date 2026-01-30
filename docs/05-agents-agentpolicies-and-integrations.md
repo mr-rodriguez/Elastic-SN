@@ -34,7 +34,7 @@ sudo cp elasticsearch-ca.pem /etc/ssl/certs
 
 **Step 1.**
 - In Kibana UI:
-  - Stack Management > Fleet > Agent Policies
+  - Hamburger menu > Fleet > Agent Policies
   - Create policy (let's name it `ubuntu-agent-policy`)
   	- leave defaults as is
   - Click on your newly created policy
