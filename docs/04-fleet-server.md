@@ -69,27 +69,40 @@ sudo ./elastic-agent install --url=https://ip-of-fleet-server:8220 \
 --install-servers
 ```
 
+Navigate to `/home/vagrant`, and then run the install
+
 *Cross you fingers that Agent is healthy!*
+
+**The Fleet > Agent page showed me an error!**
+- in Fleet > Agents, the agent status is `Unhealthy`
+  - when I click the agent, go to `Logs`, and filtr the `Log level` to `errors`, I see the message
+```text
+Error dialing dial tcp 127.0.0.1:9200: connect: connection ...
+```
+
+*Let's troubleshoot!*
 
 Check elastic-agent status
 ```bash
 # use this command to check the health of elastic-agent
 sudo /opt/Elastic/Agent/elastic-agent status
 ```
+```text
+┌─ fleet
+│  └─ status: (HEALTHY) Connected
+└─ elastic-agent
+   └─ status: (HEALTHY) Running
+```
+- the elastic agent is "HEALTHY" and "Running", despite the `Unhealthy` status seen in the Kibana UI
 
-*I got errors!*
-- elastic-agent -> healthy
-- fleet -> communication error
-
-Let's troubleshoot!
+Check connections
 ```bash
 ss -tulnp
 ```
 
-- I see a local address with the port number 8221
-- the errors I saw earlier eluded to localhost:8221. this confused me
+- I see a local address with the port number 8221, including `*:8220`
 - I checked the Outputs in kibana ui fleet settings, and the elasticsearch node was set correctly and not to localhost:8221
-- I checked the `/home/vagrant/kibana-9.2.4/elastic-agent.yml` and *found the culprit*
+- I checked the `/home/vagrant/elastic-agent-9.2.4-linux-x86_64/elastic-agent.yml` and I think I *found the culprit*
 
 ```yaml
 ######################################
@@ -112,14 +125,7 @@ Stop elastic-agent service
 sudo systemctl stop elastic-agent
 ```
 
-Create API key in Kibana UI
-- Stack Management > API keys
-- Create API key (top right button)
-	- Name your key. I put `fleet-key`
-	- Click `Create API key`
-	- **Important**: copy the encoded key and save it! you will not be able to view it again
-
-Edit `/home/vagrant/kibana-9.2.4/elastic-agent.yml`
+Edit `/home/vagrant/elastic-agent-9.2.4-linux-x86_64/elastic-agent.yml`
 ```bash
 ######################################
 # Fleet configuration
@@ -128,9 +134,9 @@ outputs:
   default:
     type: elasticsearch
     hosts: [ip-of-elasticsearch-node:9200]
-    api_key: "the-api-key-you-just-copied-goes-here"
-    username: "elastic"
-    password: <password>
+    api_key: "example-key"
+    #username: "elastic"
+    #password: <password>
     preset: balance
 ```
 
@@ -148,6 +154,40 @@ sudo /opt/Elastic/Agent/elastic-agent status
 │  └─ status: (HEALTHY) Connected
 └─ elastic-agent
    └─ status: (HEALTHY) Running
+```
+
+Check Fleet > Agents
+- The agent now shows `Healthy` for me
+
+# (Optional)
+Create API key in Kibana UI
+- Stack Management > API keys
+- Create API key (top right button)
+	- Name your key. I put `fleet-key`
+	- Click `Create API key`
+	- **Important**: copy the encoded key and save it! you will not be able to view it again
+
+Run `sudo systemctl stop elastic-agent` to stop the agent service again.
+
+Edit `/home/vagrant/elastic-agent-9.2.4-linux-x86_64/elastic-agent.yml`
+- add the encoded key to `api_key:`
+```bash
+######################################
+# Fleet configuration
+######################################
+outputs:
+  default:
+    type: elasticsearch
+    hosts: [ip-of-elasticsearch-node:9200]
+    api_key: "copy-encoded-api-key-here"
+    #username: "elastic"
+    #password: <password>
+    preset: balance
+```
+
+Restart elastic agent service
+```bash
+sudo systemctl start elastic-agent
 ```
 
 Next, go to `docs/05-agents-agentpolicies-and-integrations.md`
