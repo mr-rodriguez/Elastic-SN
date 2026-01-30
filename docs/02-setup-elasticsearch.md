@@ -38,7 +38,7 @@ Generate and copy SSH keys
 ssh-keygen
 ```
 ```bash
-# copy id_rsa.pub to kibana node at /home/vagrant/.ssh/authorized_keys
+# copy id_rsa.pub to elasticsearch node at /home/vagrant/.ssh/authorized_keys
 cat ~/.ssh/id_rsa.pub
 ```
 # Installing Elasticsearch
