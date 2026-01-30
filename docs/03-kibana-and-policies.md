@@ -38,6 +38,10 @@ Generate encryption keys, then add keys to `kibana.yml`
 Edit `kibana.yml`
 - don't copy/paste this
 - simply uncomment these sections and type it out. i had some weird "server.hostname" config error
+```bash
+vim config/kibana.yml
+```
+
 ```yaml
 server.host: ip-of-kibana-node
 server.port: 5601
