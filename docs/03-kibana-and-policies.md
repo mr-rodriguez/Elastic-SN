@@ -105,7 +105,7 @@ Let's fix this:
 		- here, we will set the settings to reduce the replica shards to zero whenever a new index is created with the index pattern `logs-*`
 
 1. *ILM Policy*: In Kibana UI:
-	1. Stack Management > Index Lifecycle Management
+	1. Stack Management > Index Lifecycle Policies
 		1. Create Policy
 		2. Enter a name for the policy (e.g. `my-first-ilm-policy`)
 		3. Hot phase
