@@ -94,6 +94,13 @@ sudo /opt/Elastic/Agent/elastic-agent status
    └─ status: (HEALTHY) Running
 ```
 - the elastic agent is "HEALTHY" and "Running", despite the `Unhealthy` status seen in the Kibana UI
+- there are also systemctl errors
+```bash
+sudo systemctl status elastic-agent
+```
+```text
+Jan 30 14:12:01 kibana01 elastic-agent[5393]: {"log.level":"error","@timestamp":"2026-01-30T14:12:01.204Z","message":"Erro>
+```
 
 Check connections
 ```bash
