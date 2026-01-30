@@ -142,6 +142,9 @@ If you entered a password when creating the node certificate, run these commands
 ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
 ```
 
+
+Edit `elasticsearch.yml` to how you see below
+- leave `xpack.security.http.ssl.keystore.path:` as is it for now
 ```bash
 vim config/elasticsearch.yml
 ```
