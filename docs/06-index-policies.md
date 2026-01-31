@@ -1,7 +1,7 @@
 # Setup an Index Template and Index Lifecycle Management Policy
 
 Because we created a single-node cluster, your indices' statuses may come up yellow. Here's an example:
-- Click the hamburger menu and go to Dev Console
+- Click the hamburger menu and go to Dev Tools
 - Run the following GET request
 ```json
 GET _cat/indices?v
