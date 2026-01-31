@@ -48,7 +48,47 @@ Let's fix this:
   "index.lifecycle.name": "my-first-ilm-policy",
   "number_of_replicas": 0
 }
-``` 
+```
+
+Test it out
+- go back to Dev Tools and create a test index with the `logs-` prefix
+```json
+PUT logs-test
+GET logs-test/_settings
+```
+
+GET Response Example
+```json
+{
+  "logs-test": {
+    "settings": {
+      "index": {
+        "lifecycle": {
+          "name": "policy1"
+        },
+        "routing": {
+          "allocation": {
+            "include": {
+              "_tier_preference": "data_content"
+            }
+          }
+        },
+        "number_of_shards": "1",
+        "provided_name": "logs-test",
+        "creation_date": "1769867372515",
+        "priority": "100",
+        "number_of_replicas": "0",
+        "uuid": "mFS2RtvCTi6RMMnNQgJYpQ",
+        "version": {
+          "created": "9039003"
+        }
+      }
+    }
+  }
+}
+```
+- notice that our ILM policy was set and that the number of replicas is set to 0
+- good job =)
 
 **Do the following to fix any current yellow status indices**
 ```json
@@ -68,4 +108,4 @@ GET _cat/indicies?v
 All indices should be green, now.
 
 **Congratulations! You're finished =)**
-- Challenge: try adding the Elastic Defend integration to the policy
+- Challenge: try adding the Elastic Defend integration to the ubuntu agent policy you created earlier
