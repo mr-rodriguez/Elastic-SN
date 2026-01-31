@@ -49,11 +49,11 @@ scp vagrant@10.10.1.2:/home/vagrant/elasticsearch-9.2.4/elasticsearch-ca.pem /ho
   	- Choose the agent policy you created from the drop down
   	- Enroll in Fleet
   	- Choose your OS arch and copy/paste commands to a text editor
-  	- add the following install flags to your list of install commands
+  	- add the install flags shown below to your list of install commands
   	- then, run the install
 ```text
 --certificate-authorities=/path/to/elasticsearch-ca.pem \
---fleet-server-es-ca=/path/to/elasticsearch-ca.pem \
+--fleet-server-es-ca=/path/to/elasticsearch-ca.pem 
 ```
 
 **Step 2.**
@@ -68,10 +68,18 @@ sudo /opt/Elastic/Agent/elastic-agent status
    └─ status: (HEALTHY) Running
 ```
 
+Check here, too
+```bash
+sudo systemctl status elastic-agent
+```
+
+Check Fleet > Agents
+- The agent now shows `Healthy` for me
+
 **Step 5.**
 - In Kibana UI
 	- Check Auditd Logs dashboard to see if any data is populating
 		- Analytics > Dashboards > `[Logs Auditd] Audit Events`
-    - may need to run some privileged commands on the box to generate logs
+    - you should see data. if not, try running some privileged commands on the box to generate logs, then refresh the dashboard page
 
 Next, go to `docs/06-index-policies`
