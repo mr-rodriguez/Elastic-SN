@@ -58,7 +58,7 @@ Elastic Agent Install parameters
 ```bash
 sudo ./elastic-agent install --url=https://ip-of-fleet-server:8220 \
 --fleet-server-es=https://ip-of-elasticsearch-node:9200 \
---fleet-server-host=ip-of-fleet-server
+--fleet-server-host=ip-of-fleet-server \
 --fleet-server-service-token=<token> \
 --fleet-server-policy=fleet-server-policy \
 --certificate-authorities=/path/to/elasticsearch-ca.pem \
