@@ -1,7 +1,7 @@
 # Generate Fleet Certificates (do this on elasticsearch node)
 
 Use the `elasticsearch-certutil` command to generate the fleet certificates
-- don't be confused about `--dns`. Since the fleet server is on the kibana node, you will enter the hostname of your kibana instance. Same this with `--ip`.
+- don't be confused about `--ip`. Since the fleet server is on the kibana node, you will enter the ip of your kibana instance.
 - the following will ask you to keep or rename the `certificate-bundle.zip` file. You may have one already, so I recommend you rename it to something like `fleet.zip`.
 ```bash
 ./bin/elasticsearch-certutil cert --pem -ca elastic-stack-ca.p12 \
