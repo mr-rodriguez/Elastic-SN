@@ -12,7 +12,7 @@ curl https://artifacts.elastic.co/downloads/kibana/kibana-9.2.4-linux-x86_64.tar
 tar -xzf kibana-9.2.4-linux-x86_64.tar.gz
 ```
 ```bash
-sudo mv elasticsearch-ca.pem /home/vagrant/kibana-9.2.4/config/
+mv elasticsearch-ca.pem kibana-9.2.4/config/
 ```
 ```bash
 mv kibana-server.* kibana-9.2.4/config/
