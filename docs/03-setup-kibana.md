@@ -12,13 +12,16 @@ curl https://artifacts.elastic.co/downloads/kibana/kibana-9.2.4-linux-x86_64.tar
 tar -xzf kibana-9.2.4-linux-x86_64.tar.gz
 ```
 ```bash
-mv elasticsearch-ca.pem kibana-9.2.4/config/
+mv kibana-9.2.4 kibana
 ```
 ```bash
-mv kibana-server.* kibana-9.2.4/config/
+mv elasticsearch-ca.pem kibana/config/
 ```
 ```bash
-cd kibana-9.2.4/
+mv kibana-server.* kibana/config/
+```
+```bash
+cd kibana/
 ```
 
 Generate encryption keys, then add keys to `kibana.yml`
@@ -36,7 +39,7 @@ vim config/kibana.yml
 ```yaml
 server.host: ip-of-kibana-node
 server.port: 5601
-server.hostname: whatever-you-want
+server.hostname: kb18
 elasticsearch.hosts: ["https://ip-of-elasticsearch-node:9200"]
 elasticsearch.username: "kibana_system"
 elasticsearch.password: "<password>"
