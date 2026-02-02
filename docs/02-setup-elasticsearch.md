@@ -75,7 +75,7 @@ vim config/elasticsearch.yml
 # cluster.name: whatever-you-want
 network.host: ip-of-elasticsearch-node
 http.port: 9200
-node.name: whatever-you-want
+node.name: es17
 discovery.type: single-node
 ```
 
@@ -197,20 +197,26 @@ Generate TLS certs with Elasticsearch HTTP cert tool
         
     6. When asked if you want to generate one certificate per node, enter `n`.
         
-        Each certificate will have its own private key, and will be issued for a specific hostname or IP address.
+        The certificate will have its own private key, and will be issued for a specific hostname or IP address.
         
-    7. When prompted, enter the name of the first node in your cluster.
+    7. When prompted, enter the name of the node in your cluster.
         
-    8. Enter all hostnames used to connect to your first node. These hostnames will be added as DNS names in the Subject Alternative Name (SAN) field in your certificate.
+    8. Enter the hostname used to connect to your node. This hostnames will be added as a DNS name in the Subject Alternative Name (SAN) field in your certificate.
         
-        List every hostname and variant used to connect to your cluster over HTTPS.
+        List the hostname and variant used to connect to your cluster over HTTPS.
         
-    9. Enter the IP addresses that clients can use to connect to your node.
-        
-    10. Repeat these steps for each additional node in your cluster.
-        
-- After generating a certificate for each of your nodes, enter a password for your private key when prompted.
+    9. Enter the IP address that clients can use to connect to your node.
+- If you chose to not use passwords for your certs, then ignore the following bullet point        
+- If you chose to enter a password, after generating the certificate for your node, enter a password for your private key when prompted.
+
+- Install the `unzip` tool
+```bash
+sudo apt install unzip
+```
 - Unzip the generated `elasticsearch-ssl-http.zip` file. This compressed file contains one directory for both Elasticsearch and Kibana.
+```bash
+unzip elasticsearch-ssl-http.zip
+```
 ```txt
 /elasticsearch
 |_ README.txt
@@ -226,7 +232,7 @@ Generate TLS certs with Elasticsearch HTTP cert tool
 |_ sample-kibana.yml
 ```
 
-Move the cert to the right location
+Move the certs to the right location
 ```bash
 mv elasticsearch/http.p12 config/
 ```
