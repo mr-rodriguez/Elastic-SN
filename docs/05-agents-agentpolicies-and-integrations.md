@@ -38,7 +38,7 @@ scp vagrant@10.10.1.2:/home/vagrant/elasticsearch/elasticsearch-ca.pem /home/vag
 **Step 1.**
 - In Kibana UI:
   - Hamburger menu > Fleet > Agent Policies
-  - Create policy (let's name it `ubuntu-agent-policy`)
+  - Create policy (let's name it `red-ribbon-linux-agent-policy`)
   	- leave defaults as is
   - Click on your newly created policy
   - Click the `system-` integration policy
