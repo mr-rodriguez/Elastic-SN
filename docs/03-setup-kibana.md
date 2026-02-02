@@ -40,6 +40,7 @@ vim config/kibana.yml
 server.host: ip-of-kibana-node
 server.port: 5601
 server.hostname: kb18
+server.publicBaseUrl: "https://ip-of-kibana-node:5601" # in production setting you'll probably have a domain name set up
 elasticsearch.hosts: ["https://ip-of-elasticsearch-node:9200"]
 elasticsearch.username: "kibana_system"
 elasticsearch.password: "<password>"
