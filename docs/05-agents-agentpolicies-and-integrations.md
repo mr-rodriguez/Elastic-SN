@@ -29,7 +29,7 @@ mkdir -p /home/vagrant/kibana/config/
 - copy the `elasticsearch-ca.pem` to that directory
 - you will need to create an ssh key and copy it to the elasticsearch node's `authorized_keys`
 ```bash
-scp vagrant@10.10.1.2:/home/vagrant/elasticsearch-9.2.4/elasticsearch-ca.pem /home/vagrant/kibana/config/
+scp vagrant@10.10.1.2:/home/vagrant/elasticsearch/elasticsearch-ca.pem /home/vagrant/kibana/config/
 ```
 
 
