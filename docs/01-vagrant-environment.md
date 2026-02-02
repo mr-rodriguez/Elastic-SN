@@ -29,10 +29,10 @@ sudo apt update && sudo apt install vagrant
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
-  config.vm.define "es01" do |ubuntu|
+  config.vm.define "es17" do |ubuntu|
     ubuntu.vm.box = "ubuntu/focal64"
     ubuntu.vm.network "private_network", ip: "x.x.x.x"
-    ubuntu.vm.hostname = "es01"
+    ubuntu.vm.hostname = "es17"
     ubuntu.vm.provision "shell", inline: <<-SHELL
       echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
       sudo sysctl -p
@@ -42,10 +42,10 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
   end
-  config.vm.define "kb01" do |ubuntu|
+  config.vm.define "kb18" do |ubuntu|
     ubuntu.vm.box = "ubuntu/focal64"
     ubuntu.vm.network "private_network", ip: "x.x.x.x"
-    ubuntu.vm.hostname = "kb01"
+    ubuntu.vm.hostname = "kb18"
     ubuntu.vm.provision "shell", inline: <<-SHELL
       echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
       sudo sysctl -p
@@ -55,10 +55,10 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
   end
-  config.vm.define "ubuntu" do |ubuntu|
+  config.vm.define "rr-linux" do |ubuntu|
     ubuntu.vm.box = "ubuntu/focal64"
     ubuntu.vm.network "private_network", ip: "x.x.x.x"
-    ubuntu.vm.hostname = "ubuntu"
+    ubuntu.vm.hostname = "rr-linux"
     ubuntu.vm.disk :disk, name: "extra_storage", size: "8GB"
     ubuntu.vm.provider "virtualbox" do |vb|
       vb.memory = "2000"
@@ -100,9 +100,9 @@ Example output
 ```text
 Current machine states:
 
-elasticsearch01           running (virtualbox)
-kibana01                  running (virtualbox)
-ulinux                    running (virtualbox)
+es17           running (virtualbox)
+kb18                  running (virtualbox)
+rr-linux                    running (virtualbox)
 ```
 
 SSH into your vagrant box
