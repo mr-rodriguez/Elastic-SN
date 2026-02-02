@@ -1,0 +1,19 @@
+# Auto-detect text files and normalize them in the repo
+* text=auto
+
+# Force LF on checkout for these file types
+*.sh     text eol=lf
+*.py     text eol=lf
+*.yml    text eol=lf
+*.yaml   text eol=lf
+Dockerfile text eol=lf
+*.md     text eol=lf
+*.json   text eol=lf
+
+# Treat common binary files as binary (no EOL changes)
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.ico    binary
+*.pdf    binary
