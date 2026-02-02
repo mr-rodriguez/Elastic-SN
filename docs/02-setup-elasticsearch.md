@@ -57,6 +57,10 @@ shasum -a 512 -c elasticsearch-9.2.4-linux-x86_64.tar.gz.sha512
 tar -xzf elasticsearch-9.2.4-linux-x86_64.tar.gz
 ```
 ```bash
+mv elasticsearch-9.2.4 elasticsearch
+```
+
+```bash
 cd elasticsearch-9.2.4/
 ```
 
@@ -138,6 +142,18 @@ xpack.security.transport.ssl:
 ```
 
 ## Setup transport TLS: Generate certs (do this on elasticsearch node)
+
+When you create certs, you'll be prompted to create and enter passwords
+- you may choose to do so or not
+- *if you don't use passwords for any certs you build from here on out, make sure you do the following*
+  - remove/clear the xpack secured passwords on the elasticsearch node
+```bash
+./bin/elasticsearch-keystore remove xpack.security.http.ssl.keystore.secure_password
+./bin/elasticsearch-keystore remove xpack.security.transport.ssl.keystore.secure_password
+./bin/elasticsearch-keystore remove xpack.security.transport.ssl.truststore.secure_password
+```
+
+**Generate the certs**
 ```bash
 ./bin/elasticsearch-certutil ca
 ```
@@ -235,7 +251,8 @@ xpack.security.transport.ssl:
 	truststore.path: elastic-certificates.p12
 ```
 
-Add the password for your private key to the secure settings in Elasticsearch
+Again, if you did add a password for your http cert...
+- add the password for your private key to the secure settings in Elasticsearch
 ```shell
 ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
 ```
